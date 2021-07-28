@@ -8,7 +8,7 @@
                 <div class = 'card-body text-center'>
                     <h4 class = 'card-text'>{{ i.content }}</h4>
                     <p class = 'btn btn-block'>Added at {{ i.time }}</p>
-                    <a href="#" class="btn btn-dark stretched-link">Delete</a>
+                    <a href="{{ url_for('tasks.delete', id = i.id) }} " class="btn btn-dark stretched-link">Complete</a>
                 </div>
             </div>
         {% endfor %}

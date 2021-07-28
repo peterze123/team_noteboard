@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-
+<body>
 {% block main %}
 <form action = "{{url_for('tasks.create')}}" method = "post"> 
-    <div>
+    <div class = 'container'>
         {{form.csrf_token()}}
         {{form.task.label}}
         {{form.task}}
@@ -13,5 +13,5 @@
         {{form.submit}}
     </div>
 </form>
-
 {% endblock main %}
+</body>

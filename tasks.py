@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template, url_for
+from flask import Blueprint, redirect, render_template, url_for, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, validators, TextAreaField
 from models import Tasks
@@ -13,6 +13,10 @@ class AddForm(FlaskForm):
     task = TextAreaField('Task', [validators.length(max = 200), validators.DataRequired(message='please enter a task')], render_kw = {"rows": 5, "cols": 30})
     name = StringField('Name', [validators.Length(max = 50), validators.Optional()])
     submit = SubmitField('OK')
+
+# delete tasks 
+class DeleteTaskForm(FlaskForm):
+    submit = SubmitField('Complete')
 
 #
 @bp.route('/board', methods = ['GET', 'POST'])
@@ -40,4 +44,26 @@ def create():
         return redirect(URL)
     return render_template('create.html', form = form)
 
-    
+# delete function for public board
+@bp.route('/<int:id>/delete', methods = ['GET','POST'])
+def delete(id):
+    task = Tasks.query.get(id)
+    form = DeleteTaskForm()
+    #
+    if form.validate_on_submit:
+        db.session.delete(task)
+        db.session.commit()
+        flash('A Task has been completed !')
+        return redirect(url_for('tasks.board'))
+
+# delete function for personal board
+@bp.route('/<int:id>/personal_delete', methods = ['GET','POST'])
+def personal_delete(id):
+    task = Tasks.query.get(id)
+    form = DeleteTaskForm()
+    #
+    if form.validate_on_submit:
+        db.session.delete(task)
+        db.session.commit()
+        flash('A Task has been completed')
+        return redirect(url_for('login.board'))

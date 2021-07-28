@@ -31,7 +31,7 @@ def board():
     tasks = Tasks.query.filter_by(name = session.get('name'))
     # when there are no tasks associated with the name
     if tasks.first() is None:
-        flash('No tasks for you today')
+        flash('You don\'t have any more tasks today !')
     return render_template('personal_board.html', t = tasks, name = session.get('name'))
 
 #let the creators checkout a worker's board

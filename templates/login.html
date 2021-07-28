@@ -3,7 +3,7 @@
 {% block main %}
 <h2>Enter Your Name</h2>
 <form action = "{{url_for('login.index')}}" method = "post"> 
-    <div>
+    <div class>
         {{form.csrf_token()}}
         {{form.name}}
 
