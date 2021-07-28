@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block main %}
+<form action = "{{url_for('tasks.create')}}" method = "post"> 
+    <div>
+        {{form.csrf_token()}}
+        {{form.task.label}}
+        {{form.task}}
+
+        {{form.name.label}}
+        {{form.name}}
+
+        {{form.submit}}
+    </div>
+</form>
+
+{% endblock main %}

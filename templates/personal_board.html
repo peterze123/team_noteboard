@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h2>{{name ~ '\'s '}}Board</h2>
+    <div class = 'card-columns' style = 'width: 1000px'>
+        {% for i in t %}
+            <div class = 'card bg-secondary'>
+                <div class = 'card-body text-center'>
+                    <h4 class = 'card-text'>{{ i.content }}</h4>
+                    <p class = 'btn btn-block'>Added at {{ i.time }}</p>
+                    <a href="#" class="btn btn-dark stretched-link">Delete</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock main %}

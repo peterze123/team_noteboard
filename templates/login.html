@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h2>Enter Your Name</h2>
+<form action = "{{url_for('login.index')}}" method = "post"> 
+    <div>
+        {{form.csrf_token()}}
+        {{form.name}}
+
+        {{form.submit}}
+    </div>
+</form>
+{% endblock main %}
