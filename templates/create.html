@@ -1,17 +1,19 @@
 {% extends "base.html" %}
+
 <body>
 {% block main %}
-<form action = "{{url_for('tasks.create')}}" method = "post"> 
-    <div class = 'container'>
-        {{form.csrf_token()}}
-        {{form.task.label}}
-        {{form.task}}
-
-        {{form.name.label}}
-        {{form.name}}
-
-        {{form.submit}}
+<form action = "{{url_for('tasks.create')}}" method = "post" style = 'width:400px; margin:0 auto;'>
+    {{form.csrf_token()}}
+    <div class = 'form-group'>
+        <label for = 'exmpleFormControlTextarea'><h4>{{form.task.label}}</h4></label>
+        <p>{{form.task}}</p>
     </div>
+    <div class = 'form-group'>
+        <label for = 'exmpleFormControlTextarea'><h4>{{'for whom'}}</h4></label>
+        <p>{{form.name}}</p>
+    </div>
+        {{form.submit}}
+
 </form>
 {% endblock main %}
 </body>

@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block main %}
-<h2>Enter Your Name</h2>
-<form action = "{{url_for('login.index')}}" method = "post"> 
+<h4 style = 'width:400px; margin:0 auto;'>Enter Your Name</h4>
+<form action = "{{url_for('login.index')}}" method = "post" style = 'width:400px; margin:0 auto;'> 
     <div class>
         {{form.csrf_token()}}
         {{form.name}}
