@@ -11,4 +11,5 @@ Technologies used
 - Flask
 - WTForms
 - Sqlalchemy
+- Sqlite 3
 - css bootstrap
