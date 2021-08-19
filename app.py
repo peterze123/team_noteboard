@@ -21,11 +21,11 @@ except FileExistsError:
 db = SQLAlchemy(app)
 
 # applying the blueprints
-import tasks
-app.register_blueprint(tasks.bp)
+import auth
+app.register_blueprint(auth.bp)
 
-import login
-app.register_blueprint(login.bp)
+import notes
+app.register_blueprint(notes.bp)
 
 app.add_url_rule('/', endpoint = 'tasks.board')
 

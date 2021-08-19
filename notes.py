@@ -11,7 +11,7 @@ bp = Blueprint('tasks', __name__)
 
 # adding tasks for the day
 class AddForm(FlaskForm):
-    task = TextAreaField('Task', [validators.length(max = 2000), validators.DataRequired(message='please enter a task')], render_kw = {"rows": 5, "cols": 30})
+    task = TextAreaField('Task', [validators.length(max = 200), validators.DataRequired(message='please enter a task')], render_kw = {"rows": 5, "cols": 30})
     name = StringField('Name', [validators.Length(max = 50), validators.Optional()])
     time= TimeField('Time', [validators.Optional()], format='%H:%M', default=None)
     submit = SubmitField('OK')
@@ -24,6 +24,8 @@ class DeleteTaskForm(FlaskForm):
 @bp.route('/board', methods = ['GET', 'POST'])
 def board():
     t = Tasks.query.filter_by(name = None)
+    if t.first() is None:
+        flash('You don\'t have any more tasks today !')
     #
     return render_template('board_public.html', t = t)
 
