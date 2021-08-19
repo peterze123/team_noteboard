@@ -1,13 +1,64 @@
 {% extends "base.html" %}
 
 {% block main %}
-<h4 style = 'width:400px; margin:0 auto;'>Enter Your Name</h4>
-<form action = "{{url_for('login.index')}}" method = "post" style = 'width:400px; margin:0 auto;'> 
-    <div class>
-        {{form.csrf_token()}}
-        {{form.name}}
+<div id="main">
+<form id="form" action = "{{url_for('login.index')}}" method = "post" style = 'width:400px; margin:0 auto;'> 
+    {{form.csrf_token()}}
 
-        {{form.submit}}
+    <div class="form-group">
+    {{form.name(class_="in form-control", id="top",placeholder="Enter Your Name")}}
     </div>
+
+
+    {{form.submit(class_="btn")}}
 </form>
+</div>
+
+<script> 
+$(document).ready(function(){
+    $('#pass').type='password';
+});
+</script>
+<style>
+    #main{
+        width: 20rem;
+        min-height: 5vh;
+        margin: 1rem auto 0 ;
+    }
+
+    .lab{
+        width: 100%;
+    }
+
+    #form{
+        display: grid;
+        place-content: center;
+    }
+    .btn{
+        position: relative;
+        margin-left: 4rem;
+        margin-bottom: 5rem;
+        width: 5rem;
+        margin-top: 0.5rem;
+        border: none;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn:hover{
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    }
+
+    .in{
+        width: 14rem;
+        margin-right: 5rem;
+        background-color: #eee;
+        border:none;
+        height: 2.5rem;
+    }
+
+    #top{
+        margin-top:8rem;
+    }
+
+</style>
 {% endblock main %}

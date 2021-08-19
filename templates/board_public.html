@@ -1,16 +1,68 @@
 {% extends "base.html" %}
 
 {% block main %}
-<h2>Public Board</h2>
-    <div class = 'card-columns' style = 'width: 1000px'>
+<!-- <h2>Public Board</h2> -->
+<div class="main">
+<div class="row">
         {% for i in t %}
-            <div class = 'card bg-secondary'>
+            <div class = 'card bg-light draggable' style="min-width: 18rem;">
                 <div class = 'card-body text-center'>
+                    <a href="{{ url_for('tasks.delete', id = i.id) }}" class="close_i"></a>
                     <h4 class = 'card-text'>{{ i.content }}</h4>
-                    <p class = 'btn btn-block'>Added at {{ i.time }}</p>
-                    <a href="{{ url_for('tasks.delete', id = i.id) }} " class="btn btn-dark stretched-link">Complete</a>
+                    {% if i.time %}
+                        <p class = 'btn btn-block'>Due by {{ i.time }}</p>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}
     </div>
+</div>
+</div>
+<script>
+    $( function() {
+      $( ".draggable" ).draggable();
+    } );
+</script>
+<style>
+    .card{
+        cursor:pointer;
+        margin-right: 2rem;
+        margin-bottom: 2rem;
+    }
+    .card-column{
+        display: table-cell;
+        float:left;
+        min-height: 200px;
+    }
+    .close_i {
+        position: absolute;
+        right: 2px;
+        top: 6px;
+        width: 32px;
+        height: 32px;
+        opacity: 0.3;
+    }
+    .close_i:hover {
+        opacity: 1;
+    }
+    .close_i:before, .close_i:after {
+        position: absolute;
+        left: 15px;
+        content: ' ';
+        height: 18px;
+        width: 2px;
+        background-color: #333;
+    }
+    .close_i:before {
+        transform: rotate(45deg);
+    }
+    .close_i:after {
+        transform: rotate(-45deg);
+    }
+    .main{
+        margin-top: 2rem;
+        margin-left: 5rem;
+        margin-right: 5rem;
+    }
+</style>
 {% endblock main %}

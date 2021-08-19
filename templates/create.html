@@ -5,15 +5,35 @@
 <form action = "{{url_for('tasks.create')}}" method = "post" style = 'width:400px; margin:0 auto;'>
     {{form.csrf_token()}}
     <div class = 'form-group'>
-        <label for = 'exmpleFormControlTextarea'><h4>{{form.task.label}}</h4></label>
-        <p>{{form.task}}</p>
+        <p>{{form.task(class_="in form-control", id="content",placeholder="Enter Your Note")}}</p>
     </div>
     <div class = 'form-group'>
-        <label for = 'exmpleFormControlTextarea'><h4>{{'for whom'}}</h4></label>
-        <p>{{form.name}}</p>
+        <p>{{form.name(class_="in form-control", id="name",placeholder="To Whom")}}</p>
     </div>
-        {{form.submit}}
+    <div class = 'form-group'>
+        <p>{{form.time(class_="in form-control", id="time")}}</p>
+    </div>
+        {{form.submit(class_="btn")}}
 
 </form>
+<style>
+    .btn{
+        position: relative;
+        width: 5rem;
+        margin-top: 0.5rem;
+        border: none;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn:hover{
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    }
+    #time{
+        width: 35%;
+    }
+    #content{
+        margin-top:5rem;
+    }
+</style>
 {% endblock main %}
 </body>

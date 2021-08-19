@@ -6,24 +6,22 @@
 
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     </head>
     <body>
-        <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
-            <div class = 'container-fluid'>
+        <nav class='heading navbar navbar-expand-lg navbar-light bg-light'>
+            <div class = 'h container-fluid'>
                 <div class = 'navbar-header'>
                     <a class = 'navbar-brand'>
-                        <script>
-                            var str = new Date().toLocaleDateString();
-                            document.write(str.fontcolor('grey')); 
-                        </script>                       
+                        <span class = 'nav-link' id = 'time-now' style='padding-left: 0;'></span>                
                     </a>
                 </div>
                 <ul class = 'navbar-nav'>
-                    <li class = 'nav-item'><a href = " {{url_for('tasks.board')}}" class='nav-link'>Public Board</a></li>
-                    <li class = 'nav-item'><a href = " {{url_for('login.index')}}" class='nav-link'>Your Board</a></li>
-                    <li class = 'nav-item'><a href = " {{url_for('tasks.create')}}" class='nav-link'>Create</a></li>               
+                    <li class = 'nav-item'><a id = 'public' href = " {{url_for('tasks.board')}}" class='nav-link'>Public Board</a></li>
+                    <li class = 'nav-item'><a id = 'personal' href = " {{url_for('login.index')}}" class='nav-link'>Your Board</a></li>
+                    <li class = 'nav-item'><a id = 'create' href = " {{url_for('tasks.create')}}" class='nav-link'>Create</a></li>               
                 </ul>
             </nav>
             </div>
@@ -45,4 +43,47 @@
     {% block main %}
     {% endblock main %}
     </body>
+    <script>
+        var p = window.location.pathname;
+        $(document).ready(function(){
+            if (p.indexOf("board") > 0 &&  p.indexOf("your_board") == -1){
+                $("#public").css("font-weight", "bold");
+                $("#public").css("color", "rgb(126, 123, 123)");
+            }
+
+            if (p.indexOf("your_board") > 0 || p.indexOf("login") > 0){
+                $("#personal").css("font-weight", "bold");
+                $("#personal").css("color", "rgb(126, 123, 123)");
+            }
+
+            if (p.indexOf("create") > 0){
+                $("#create").css("font-weight", "bold");
+                $("#create").css("color", "rgb(126, 123, 123)");
+            }
+        })
+        $('#time-now').html(new Date().toLocaleTimeString('en-US',{
+            hour12:true,
+            hour:"numeric",
+            minute:"numeric",
+        }));
+    </script>       
+    <style>
+        .heading{
+            padding-bottom: 1rem;
+        }
+
+        .h{
+            margin-top: 0.5rem;
+        }
+
+        .nav-item, .nav-link{
+            color: rgb(126, 123, 123);
+        }
+
+        .nav-item:hover, .nav-link:hover{
+            cursor: pointer;
+            color: rgb(126, 123, 123);
+            font-weight: bold;
+        }
+    </style>
 </html>
