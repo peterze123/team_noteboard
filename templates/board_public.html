@@ -2,8 +2,8 @@
 
 {% block main %}
 <!-- <h2>Public Board</h2> -->
-<div class="main">
-<div class="row">
+<div class="main" id="parent">
+    <div class="row">
         {% for i in t %}
             <div class = 'card bg-light draggable' style="min-width: 18rem;">
                 <div class = 'card-body text-center'>
@@ -16,12 +16,61 @@
             </div>
         {% endfor %}
     </div>
-</div>
+    <div id="cav-div" class= 'card bg-light' style="width: 50rem; height:25rem">
+        <div id="movable" class="card-header">
+            <input type="color" /> 
+            <a id="clear">Clear</a>
+        </div>    
+        <div id='board'> 
+            <canvas id="cav"></canvas>
+        </div>  
+    </div>
 </div>
 <script>
-    $( function() {
-      $( ".draggable" ).draggable({containment: "window"});
-    } );
+    $(document).ready(function() {
+        $( ".draggable" ).draggable({containment: "window"});
+        $('#cav-div').draggable({
+            handle: $("#movable")
+        });
+        //
+        let canvas = document.getElementById('cav');
+        let ctx = canvas.getContext('2d');
+        canvas.width = $("#board").width();
+        canvas.height = $("#board").height();
+        
+        function paint(X, Y){
+            ctx.lineWidth = 10;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = $('input[type=color]').val();
+            ctx.lineTo(X, Y);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(X, Y);
+        }
+        let click = false;
+
+        $('#cav').mousedown(function(e){
+            console.log('down');
+            click = true;
+            paint(e.pageX - $('#cav').offset().left, e.pageY - $('#cav').offset().top);
+        });
+
+        $('#cav').mousemove(function(e){
+            if(click){
+                paint(e.pageX - $('#cav').offset().left, e.pageY - $('#cav').offset().top);
+            }
+        });
+
+        $('#cav').mouseup(function(e){
+            click = false;
+            ctx.beginPath();
+        });
+
+        $("#clear").on('click', function () {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
+    });
+
 </script>
 <style>
     .card{
@@ -60,9 +109,33 @@
         transform: rotate(-45deg);
     }
     .main{
+        position: absolute;
         margin-top: 2rem;
-        margin-left: 5rem;
-        margin-right: 5rem;
+        padding-bottom: 10rem;
+        height:100%;
+        width:100%;
     }
+    #board{
+        height:100%;
+    }
+    #movable{
+        display:grid;
+        grid-template-columns:1fr repeat(2, auto);
+    }
+    #clear{
+        border: none;
+        width: 4rem;
+        color: rgb(126, 123, 123);
+        outline: none;
+    }
+
+    #clear:hover{
+        cursor: pointer;
+        color: rgb(126, 123, 123);
+        font-weight: bold;
+        outline: none;
+    }
+
 </style>
 {% endblock main %}
+

@@ -15,7 +15,7 @@
             <div class = 'h container-fluid'>
                 <div class = 'navbar-header'>
                     <a class = 'navbar-brand'>
-                        <span class = 'nav-link' id = 'time-now' style='padding-left: 0;'></span>                
+                        <span class = 'nav-link' id = 'time-now' style='padding-left: 0;'></span>    
                     </a>
                 </div>
                 <ul class = 'navbar-nav'>
@@ -44,7 +44,7 @@
     {% endblock main %}
     </body>
     <script>
-        var p = window.location.pathname;
+        let p = window.location.pathname;
         $(document).ready(function(){
             if (p.indexOf("board") > 0 &&  p.indexOf("your_board") == -1){
                 $("#public").css("font-weight", "bold");
