@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 # initializes the appp
@@ -11,14 +11,15 @@ app.config.from_mapping(
     SQLALCHEMY_DATABASE_URI = 'sqlite:///data.db'
 )
 
+# initing the database
+db = SQLAlchemy(app)
+
+
 # check for the isntance folder
 try:
     os.makedirs(app.instance_path)
 except FileExistsError:
     pass
-
-# initing the database
-db = SQLAlchemy(app)
 
 # applying the blueprints
 import auth

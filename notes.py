@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, render_template, url_for, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, validators, TextAreaField
-from wtforms.fields.html5 import TimeField
+from wtforms import TimeField
 from models import Tasks
 from app import db
 from datetime import datetime
